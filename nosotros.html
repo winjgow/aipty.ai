@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aipty.ai - Liderando la IA en Panamá</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C40B5;
+            --secondary: #FFD700;
+            --accent: #FF4D79;
+            --dark: #1A0933;
+            --light: #F8F9FA;
+        }
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        .footer .social-links a {
+            color: var(--secondary);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer .social-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .mission-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(26, 9, 51, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 12rem 2rem 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -10%;
+            right: -10%;
+            height: 100px;
+            background: var(--light);
+            transform: rotate(-2deg);
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideUp 1s forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideUp 1s 0.2s forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin: 6rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .section.visible .section-title::after {
+            transform: scaleX(1);
+        }
+
+        .team {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(108, 64, 181, 0.1));
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+
+        .team-member:hover::before {
+            top: 0;
+            left: 0;
+        }
+
+        .team-member-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover .team-member-img {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .team-member-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .team-member-role {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .team-member-bio {
+            font-size: 1rem;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .team {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="mente.html" class="logo">aipty.ai</a>
+            <div class="nav-links">
+                <a href="mente.html">Inicio</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="#">Eventos</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="nosotros" class="section">
+        <div class="container">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <p class="section-description">
+                En Aipty.ai, somos un grupo apasionado de estudiantes y profesionales dedicados a liderar la innovación tecnológica en Panamá a través de la inteligencia artificial. Nuestra misión es impulsar el desarrollo de la IA en diversas áreas, proporcionando recursos educativos, colaboraciones y proyectos prácticos para la comunidad.
+            </p>
+
+            <div class="team">
+                <!-- Miembros del equipo con efecto hover mejorado -->
+                <div class="team-member">
+                    <img src="ruta/a/imagen1.jpg" alt="Juan Pérez" class="team-member-img">
+                    <h3 class="team-member-name">Juan Pérez</h3>
+                    <p class="team-member-role">Fundador & CEO</p>
+                    <p class="team-member-bio">
+                        Especialista en IA con más de 5 años de experiencia liderando proyectos innovadores en el sector tecnológico.
+                    </p>
+                </div>
+
+                <div class="team-member">
+                    <img src="ruta/a/imagen2.jpg" alt="Ana Rodríguez" class="team-member-img">
+                    <h3 class="team-member-name">Ana Rodríguez</h3>
+                    <p class="team-member-role">Directora de Investigación</p>
+                    <p class="team-member-bio">
+                        Experta en machine learning y análisis de datos, apasionada por resolver problemas complejos mediante IA.
+                    </p>
+                </div>
+
+                <div class="team-member">
+                    <img src="ruta/a/imagen3.jpg" alt="Carlos González" class="team-member-img">
+                    <h3 class="team-member-name">Carlos González</h3>
+                    <p class="team-member-role">Director de Tecnología</p>
+                    <p class="team-member-bio">
+                        Desarrollador full-stack especializado en implementación de sistemas basados en IA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Ciudad de Panamá, Panamá</p>
+                <p>contacto@aipty.ai</p>
+                <p>+507 1234-5678</p>
+            </div>
+        <p>&copy; 2025 Mente.ai - Todos los derechos reservados</p>
+    </footer>
+    <script>
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+     
+</body>
+</html>
